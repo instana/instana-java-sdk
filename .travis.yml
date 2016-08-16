@@ -1,0 +1,4 @@
+language: java
+sudo: false
+
+script: mvn -f instana-java-sdk/pom.xml clean verify
