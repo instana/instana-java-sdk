@@ -31,16 +31,31 @@ and make sure you package and deploy the SDK jar with your application.
 
 When using maven you can add it with:
 
-    <dependency>
-      <groupId>com.instana</groupId>
-      <artifactId>instana-java-sdk</artifactId>
-      <version>1.0.1</version>
-    </dependency>
+```
+<dependency>
+  <groupId>com.instana</groupId>
+  <artifactId>instana-java-sdk</artifactId>
+  <version>1.0.1</version>
+</dependency>
+```
+
+To avoid any unwanted interference by scanning for the SDK annotations, the
+agent requires the following configuration to whitelist packages for SDK usage:
+
+```
+com.instana.plugin.javatrace:
+  instrumentation:
+    sdk:
+      packages:
+        - 'com.acme'
+```
 
 By design, the SDK will remain inactive when no Instana agent is monitoring the
 JVM process. It will also return to inactivity when the Instana agent is
 stopped. Therefore it is safe to keep it in your application code even when
 deploying to systems not yet monitored by Instana.
+
+
 
 The whole SDK contained in this repository is provided with an MIT License
 (see `LICENSE.md`), to allow any use and conflict with strict open source
