@@ -123,9 +123,12 @@ public class SpanSupport {
    * 
    * @param traceId
    *          to be inherited by next entry.
+   * @deprecated use two argument {@link #inheritNext(long, long)} instead to build a correct parent child relationship.
+   *             Will be removed in SDK release 1.1.
    */
+  @Deprecated
   public static void inheritNext(long traceId) {
-    inheritNext(traceId, VOID_ID);
+    inheritNext(traceId, traceId);
   }
 
   /**
