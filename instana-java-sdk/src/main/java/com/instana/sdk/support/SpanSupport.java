@@ -110,6 +110,32 @@ public class SpanSupport {
   }
 
   /**
+   * Tags the current span of the given type with an explicit name. This tag overrides any previous tag.
+   *
+   * @param type
+   *          The type of span that should be tagged.
+   * @param tag
+   *          The name of the span.
+   */
+  public static void tag(Span.Type type, String tag) {
+    tag(type, tag, true);
+  }
+
+
+  /**
+   * Tags the current span of the given type with an explicit name.
+   * @param type
+   *          The type of span that should be tagged.
+   * @param tag
+   *          The name of the span.
+   * @param override
+   *          Determines if this tag should replace a previous tag, if such a tag was previously set.
+   */
+  public static void tag(Span.Type type, String tag, boolean override) {
+    /* empty */
+  }
+
+  /**
    * Indicates to Instana that no tracing information should be collected until a subsequent {@link Span.Type#ENTRY}
    * span is exited.
    */
