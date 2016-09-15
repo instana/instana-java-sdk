@@ -146,6 +146,16 @@ public class SpanSupport {
   }
 
   /**
+   * Clears an open span, i.e. ends a currently open span without committing it.
+   *
+   * @param type
+   *          The type of span to clear.
+   */
+  public static void clearCurrent(Span.Type type) {
+    /* empty */
+  }
+
+  /**
    * @return Represents a trace or span id in a string format that can be send over the wire. This format is recognized
    *         by Instana's built-in instrumentations.
    * @param id
