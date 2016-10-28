@@ -72,7 +72,7 @@ and optimized instrumentation.
 
 The endpoint listens on any running agent at
 `http://localhost:42699/com.instana.plugin.generic.trace` and accepts the
-following JSON:
+following JSON via a POST request:
 
 ```
 {
