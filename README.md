@@ -63,14 +63,10 @@ licensing requirements.
 
 # Instana Trace Webservice
 
-There is an additional option to generate traces. The Instana Agent offers a
-WebService/Rest endpoint, which accepts a JSON description of a `Span`. The most
-common use case for that is to generate Spans in unmonitored or very custom
-components. In fact this endpoint allows to submit trace data for any
-programming language manually. Of course we still work towards a fully automatic
-and optimized instrumentation.
-
-The endpoint listens on any running agent at
+Using the Trace SDK REST Web Service, it is possible to integrate Instana into
+any application written in any language. Each running Instana Agent can be used
+to feed in custom traces, which can be part of automatically captured traces or
+completely separated. The Agent offers an endpoint which listens on
 `http://localhost:42699/com.instana.plugin.generic.trace` and accepts the
 following JSON via a POST request:
 
@@ -85,22 +81,27 @@ following JSON via a POST request:
   'type' : <string>,
   'data' : {
     <string> : <string>
-  },
-  'agent' : <string>
+  }
 }
 ```
 
-`spanId` is a unique identifier for the span. `parentId` and `traceId` are optional and
-refer to the hierarchy of spans. `timestamp` and `duration` are in milliseconds.
-`name` can be any string which is used to visualize and group traces and can
-contain any text, but it is recommended to keep it simple.
-`type` is optional, but when given needs to be either `ENTRY`, `EXIT` or
-`INTERMEDIATE`. `data` is optional and can contain arbitrary key-value pairs.
-Behaviour of supplying duplicate keys is unspecified. `agent` is used in the
-user interface to indicate what trace agent was used to generate the span and
-potentially to access trace agent internal fields. When unset it will use `ws`.
-Other trace agents provided by Instana already are `java`, `php` and `node`.
-The field is optional, and only documented for completeness.
+`spanId` is an unique identifier for the span. Define the root span of a trace
+with the same `spanId` and `traceId`; define child spans with a unique `spanId`,
+the `traceId` of the root span and the `spanId` of the span immediately
+preceding in the hierarchy as parentId.
+
+```
+root (spanId=1, traceID=1)
+   child (spanId=2,traceId=1, parentId=1)
+      child (spanId=3, traceId=1, parentId=2)
+```
+
+`timestamp` and `duration` are in milliseconds.  `timestamp` must be the epoch
+timestamp coordinated to UTC. `name` can be any string which is used to
+visualize and group traces and can contain any text, but it is recommended to
+keep it simple. `type` is optional, but when given needs to be either `ENTRY`,
+`EXIT` or `INTERMEDIATE`. `data` is optional and can contain arbitrary
+key-value pairs. Behaviour of supplying duplicate keys is unspecified. 
 
 The endpoint also accepts a batch of spans, which then need to be given as array:
 ```
