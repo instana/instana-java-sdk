@@ -17,7 +17,7 @@ public class CustomBatchJob {
     try {
       Random random = new Random();
       Thread.sleep(TimeUnit.SECONDS.toMillis(random.nextInt(4))); // do hard work
-      SpanSupport.annotate(Span.Type.INTERMEDIATE, "between-jobs", Long.toString(System.currentTimeMillis()));
+      SpanSupport.annotate(Span.Type.INTERMEDIATE, "my-custom-batch", "between-jobs", Long.toString(System.currentTimeMillis()));
       Thread.sleep(TimeUnit.SECONDS.toMillis(random.nextInt(4))); // do hard work
       return true;
     } catch (InterruptedException ignored) {

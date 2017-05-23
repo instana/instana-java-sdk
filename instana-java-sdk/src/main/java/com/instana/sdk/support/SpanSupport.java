@@ -47,8 +47,22 @@ public class SpanSupport {
    *         method always returns {@code false}.
    * @param type
    *          span type.
+   * @deprecated Use {@link SpanSupport#isTracing(Span.Type, String)}.
    */
+  @Deprecated
   public static boolean isTracing(Span.Type type) {
+    return isTracing(type, null);
+  }
+
+  /**
+   * @return Indicates if a span for the current type is currently recorded. If the Instana agent is not active, this
+   *         method always returns {@code false}.
+   * @param type
+   *          span type.
+   * @param name
+   *          span name.
+   */
+  public static boolean isTracing(Span.Type type, String name) {
     return false;
   }
 
@@ -57,8 +71,22 @@ public class SpanSupport {
    *         is returned.
    * @param type
    *          span type.
+   * @deprecated Use {@link SpanSupport#currentTraceId(Span.Type, String)}.
    */
+  @Deprecated
   public static long currentTraceId(Span.Type type) {
+    return currentTraceId(type, null);
+  }
+
+  /**
+   * @return The current trace ID for the currently recorded {@link Span}. If no span is currently recorded, {@code 0}
+   *         is returned.
+   * @param type
+   *          span type.
+   * @param name
+   *          span name.
+   */
+  public static long currentTraceId(Span.Type type, String name) {
     return VOID_ID;
   }
 
@@ -67,9 +95,40 @@ public class SpanSupport {
    *         returned.
    * @param type
    *          span type.
+   * @deprecated Use {@link SpanSupport#currentSpanId(Span.Type, String)}.
    */
+  @Deprecated
   public static long currentSpanId(Span.Type type) {
+    return currentSpanId(type, null);
+  }
+
+  /**
+   * @return The current span ID for the currently recorded {@link Span}. If no span is currently recorded, {@code 0} is
+   *         returned.
+   * @param type
+   *          span type.
+   * @param name
+   *          span name.
+   */
+  public static long currentSpanId(Span.Type type, String name) {
     return VOID_ID;
+  }
+
+  /**
+   * Writes an annotation as a {@code key}-{@code value} pair to the current span. If no span is currently recorded or
+   * if the Instana agent is not active, no annotation is written.
+   *
+   * @param type
+   *          span type.
+   * @param key
+   *          a String key. Uniqueness is enforced in backend.
+   * @param value
+   *          a String value.
+   * @deprecated Use {@link SpanSupport#annotate(Span.Type, String, String, String)}.
+   */
+  @Deprecated
+  public static void annotate(Span.Type type, String key, String value) {
+    annotate(type, null, key, value);
   }
 
   /**
@@ -78,13 +137,34 @@ public class SpanSupport {
    * 
    * @param type
    *          span type.
+   * @param name
+   *          span name.
    * @param key
    *          a String key. Uniqueness is enforced in backend.
    * @param value
    *          a String value.
    */
-  public static void annotate(Span.Type type, String key, String value) {
+  public static void annotate(Span.Type type, String name, String key, String value) {
     /* empty */
+  }
+
+  /**
+   * Writes an annotation as a {@code key}-{@code value} pair to the current span. If no span is currently recorded or
+   * if the Instana agent is not active, no annotation is written. This method evaluates the {@code value} lazily and
+   * only if a span is currently recorded. Using this method is mainly intended for being used with a lambda expression
+   * as the last argument if Java 8 is available.
+   *
+   * @param type
+   *          span type.
+   * @param key
+   *          a String key. Uniqueness is enforced in backend.
+   * @param value
+   *          a Callable, which resolves to a String value, which is invoked if span is recorded.
+   * @deprecated Use {@link SpanSupport#annotate(Span.Type, String, String, Callable)}.
+   */
+  @Deprecated
+  public static void annotate(Span.Type type, String key, Callable<? extends String> value) {
+    annotate(type, null, key, value);
   }
 
   /**
@@ -95,15 +175,17 @@ public class SpanSupport {
    * 
    * @param type
    *          span type.
+   * @param name
+   *          span name.
    * @param key
    *          a String key. Uniqueness is enforced in backend.
    * @param value
    *          a Callable, which resolves to a String value, which is invoked if span is recorded.
    */
-  public static void annotate(Span.Type type, String key, Callable<? extends String> value) {
-    if (isTracing(type)) {
+  public static void annotate(Span.Type type, String name, String key, Callable<? extends String> value) {
+    if (isTracing(type, name)) {
       try {
-        annotate(type, key, value.call());
+        annotate(type, name, key, value.call());
       } catch (Exception ignored) {
       }
     }
@@ -178,11 +260,27 @@ public class SpanSupport {
    *          span type.
    * @param map
    *          a map which accepts Strings as key value pair.
+   * @deprecated Use {@link SpanSupport#addTraceHeadersIfTracing(Span.Type, String, Map)}.
    */
+  @Deprecated
   public static void addTraceHeadersIfTracing(Span.Type type, Map<? super String, ? super String> map) {
-    if (isTracing(type)) {
-      map.put(TRACE_ID, idAsString(currentTraceId(type)));
-      map.put(SPAN_ID, idAsString(currentSpanId(type)));
+    addTraceHeadersIfTracing(type, null, map);
+  }
+
+  /**
+   * Adds all trace headers to the map. All values are rendered as {@link String}.
+   *
+   * @param type
+   *          span type.
+   * @param name
+   *          span name.
+   * @param map
+   *          a map which accepts Strings as key value pair.
+   */
+  public static void addTraceHeadersIfTracing(Span.Type type, String name, Map<? super String, ? super String> map) {
+    if (isTracing(type, name)) {
+      map.put(TRACE_ID, idAsString(currentTraceId(type, name)));
+      map.put(SPAN_ID, idAsString(currentSpanId(type, name)));
       map.put(LEVEL, "1");
     }
   }

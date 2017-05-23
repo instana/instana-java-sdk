@@ -16,7 +16,7 @@ public class CustomTCPClient {
 
     // Convenience method which automatically checks if tracing is active and sets all headers.
     // Headers can also be transported in custom named fields or as long manually.
-    SpanSupport.addTraceHeadersIfTracing(Type.EXIT, params);
+    SpanSupport.addTraceHeadersIfTracing(Type.EXIT, "custom-tcp-client", params);
 
     try (Socket clientSocket = new Socket("localhost", 8888)) {
       try (ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());
