@@ -39,7 +39,10 @@ public class SpanSupport {
 
   /**
    * A trace id of value {@code 0} that indicates an inactive span.
+   * 
+   * @deprecated inactive spans are returned as null Strings
    */
+  @Deprecated
   public static final long VOID_ID = 0L;
 
   /**
@@ -71,7 +74,7 @@ public class SpanSupport {
    *         is returned.
    * @param type
    *          span type.
-   * @deprecated Use {@link SpanSupport#currentTraceId(Span.Type, String)}.
+   * @deprecated Use {@link SpanSupport#traceId(Span.Type, String)}.
    */
   @Deprecated
   public static long currentTraceId(Span.Type type) {
@@ -85,9 +88,23 @@ public class SpanSupport {
    *          span type.
    * @param name
    *          span name.
+   * @deprecated Use {@link SpanSupport#traceId(Span.Type, String)}.
    */
+  @Deprecated
   public static long currentTraceId(Span.Type type, String name) {
     return VOID_ID;
+  }
+
+  /**
+   * @return The current trace ID for the currently recorded {@link Span}. If no span is currently recorded,
+   *         {@code null} is returned.
+   * @param type
+   *          span type.
+   * @param name
+   *          span name.
+   */
+  public static String traceId(Span.Type type, String name) {
+    return null;
   }
 
   /**
@@ -109,9 +126,23 @@ public class SpanSupport {
    *          span type.
    * @param name
    *          span name.
+   * @deprecated Use {@link SpanSupport#spanId(Span.Type, String)}.
    */
+  @Deprecated
   public static long currentSpanId(Span.Type type, String name) {
     return VOID_ID;
+  }
+
+  /**
+   * @return The current span ID for the currently recorded {@link Span}. If no span is currently recorded, {@code null}
+   *         is returned.
+   * @param type
+   *          span type.
+   * @param name
+   *          span name.
+   */
+  public static String spanId(Span.Type type, String name) {
+    return null;
   }
 
   /**
@@ -201,20 +232,6 @@ public class SpanSupport {
 
   /**
    * Indicates to Instana that the subsequent {@link Span.Type#ENTRY} span should always be traced after receiving a
-   * request from another entity that has the supplied {@code traceId}. The trace id must not be {@code 0}.
-   * 
-   * @param traceId
-   *          to be inherited by next entry.
-   * @deprecated use two argument {@link #inheritNext(long, long)} instead to build a correct parent child relationship.
-   *             Will be removed in SDK release 1.1.
-   */
-  @Deprecated
-  public static void inheritNext(long traceId) {
-    inheritNext(traceId, traceId);
-  }
-
-  /**
-   * Indicates to Instana that the subsequent {@link Span.Type#ENTRY} span should always be traced after receiving a
    * request from another entity that has the supplied {@code traceId} and {@code spanId}. The trace id must not be
    * {@code 0}.
    * 
@@ -222,8 +239,24 @@ public class SpanSupport {
    *          to be inherited by next entry.
    * @param spanId
    *          to be set as parent by next entry.
+   * @deprecated Use {@link SpanSupport#inheritNext(String, String)}.
    */
+  @Deprecated
   public static void inheritNext(long traceId, long spanId) {
+    /* empty */
+  }
+
+  /**
+   * Indicates to Instana that the subsequent {@link Span.Type#ENTRY} span should always be traced after receiving a
+   * request from another entity that has the supplied {@code traceId} and {@code spanId}. The trace id and span id must
+   * not be {@code null}.
+   * 
+   * @param traceId
+   *          to be inherited by next entry.
+   * @param spanId
+   *          to be set as parent by next entry.
+   */
+  public static void inheritNext(String traceId, String spanId) {
     /* empty */
   }
 
@@ -242,7 +275,9 @@ public class SpanSupport {
    *         by Instana's built-in instrumentations.
    * @param id
    *          a long id.
+   * @deprecated always use string ids without long conversion. trace ids might not fit long.
    */
+  @Deprecated
   public static String idAsString(long id) {
     return Long.toHexString(id);
   }
@@ -252,7 +287,9 @@ public class SpanSupport {
    *         format is used by Instana's built-in instrumentations.
    * @param stringId
    *          a String id.
+   * @deprecated always use string ids without long conversion. trace ids might not fit long.
    */
+  @Deprecated
   public static long stringAsId(String stringId) {
     int len = stringId.length();
     if (len <= 12) {
@@ -289,8 +326,8 @@ public class SpanSupport {
    */
   public static void addTraceHeadersIfTracing(Span.Type type, String name, Map<? super String, ? super String> map) {
     if (isTracing(type, name)) {
-      map.put(TRACE_ID, idAsString(currentTraceId(type, name)));
-      map.put(SPAN_ID, idAsString(currentSpanId(type, name)));
+      map.put(TRACE_ID, traceId(type, name));
+      map.put(SPAN_ID, spanId(type, name));
       map.put(LEVEL, "1");
     }
   }
