@@ -5,7 +5,7 @@
 
   <groupId>com.instana</groupId>
   <artifactId>instana-java-sdk</artifactId>
-  <version>1.0.4-SNAPSHOT</version>
+  <version>1.1.0</version>
 
   <name>Instana - Java Instrumentation - SDK</name>
   <description>SDK for custom instrumentation and correlation.</description>
@@ -33,7 +33,7 @@
     <connection>scm:git:git://github.com/instana/instana-java-sdk.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/instana/instana-java-sdk.git</developerConnection>
     <url>https://github.com/instana/instana-java-sdk</url>
-    <tag>HEAD</tag>
+    <tag>instana-java-sdk-1.1.0</tag>
   </scm>
 
   <properties>
