@@ -35,7 +35,7 @@ When using maven you can add it with:
 <dependency>
   <groupId>com.instana</groupId>
   <artifactId>instana-java-sdk</artifactId>
-  <version>1.0.3</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
@@ -72,9 +72,9 @@ following JSON via a POST request:
 
 ```
 {
-  'spanId': <64 bit long>,
-  'parentId': <64 bit long>,
-  'traceId': <64 bit long>,
+  'spanId': <string>,
+  'parentId': <string>,
+  'traceId': <string>,
   'timestamp': <64 bit long>,
   'duration': <64 bit long>,
   'name' : <string>,
@@ -89,7 +89,8 @@ following JSON via a POST request:
 `spanId` is an unique identifier for the span. Define the root span of a trace
 with the same `spanId` and `traceId`; define child spans with a unique `spanId`,
 the `traceId` of the root span and the `spanId` of the span immediately
-preceding in the hierarchy as parentId.
+preceding in the hierarchy as parentId. Trace Id, Span Id and Parent Id are
+64 bit unique values encoded as hex string like `b0789916ff8f319f`.
 
 ```
 root (spanId=1, traceID=1)
@@ -103,7 +104,7 @@ visualize and group traces and can contain any text, but it is recommended to
 keep it simple. `type` is optional, but when given needs to be either `ENTRY`,
 `EXIT` or `INTERMEDIATE`. `data` is optional and can contain arbitrary
 key-value pairs. `error` is optional and can be set to `true` to indicate an
-erroneous span. Behaviour of supplying duplicate keys is unspecified. 
+erroneous span. Behaviour of supplying duplicate keys is unspecified.
 
 The endpoint also accepts a batch of spans, which then need to be given as array:
 ```
