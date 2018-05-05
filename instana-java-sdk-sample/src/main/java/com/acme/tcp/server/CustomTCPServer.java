@@ -47,7 +47,7 @@ public class CustomTCPServer extends Thread {
       SpanSupport.suppressNext();
     } else {
       if (trace != null && span != null) {
-        SpanSupport.inheritNext(SpanSupport.stringAsId(trace), SpanSupport.stringAsId(span));
+        SpanSupport.inheritNext(trace, span);
       }
     }
   }
