@@ -116,3 +116,28 @@ The endpoint also accepts a batch of spans, which then need to be given as array
     // span as above
   }
 ]
+```
+
+## Limitations
+
+Adher to the following rate limits for the trace webservice:
+
+* Maximum API calls/sec: 20
+* Maximum payload per POST request: A span must not exceed 4 KiB. The request size must not exceed 4 MiB.
+* Maximum batch size (spans/array): 1000
+
+## FAQ
+
+_Q_: Is there a limit for the amount of calls from Agent to Backend?<br/>
+_A_: Data transmission between Instana agent and Instana backend depends on a lot of factors. It is done using a persistent HTTP2 connection and highly optimized.
+
+_Q_: What is the optimal package size (splitted size) to send 50,000 spans with a size about 40 MiB over the Agent to Backend?<br/>
+_A_: Recommended strategy is to buffer spans for up to one second or until 500 spans were collected, then transmit the spans to the agent. An implementation of this transmission strategy can be seen here:
+
+https://github.com/instana/nodejs-sensor/blob/6ec0d469006ad52f4d5fde7218b163e05bf5b2ad/src/tracing/transmission.js
+
+_Q_: Which requirements are recommended for best Agent performance (cpu, ram, etc.)?<br/>
+_A_: This depends on the host that should be monitored, e.g. the number of Docker containers per host etc.
+
+_Q_: How should the agent environment be configured?<br/>
+_A_: See https://docs.instana.io/quick_start/agent_configuration/
