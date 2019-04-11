@@ -36,7 +36,8 @@ public @interface Span {
   /**
    * @return Indicates the number of stack frames that should be saved upon entering this method. A negative number
    *         indicates that no stack frames are captured (this is the default and improves performance). A value of 0
-   *         captures the full stack. It is recommended that an Entry should capture 1 stack frame.
+   *         does not capture any stacktrace. It is recommended that an Entry should capture 1 stack frame, or anyhow
+   *         few (less than 10).
    */
   int capturedStackFrames() default -1;
 
@@ -88,7 +89,8 @@ public @interface Span {
     /**
      * @return Indicates the number of stack frames that should be saved upon entering this method. A negative number
      *         indicates that no stack frames are captured (this is the default and improves performance). A value of 0
-     *         captures the full stack. It is recommended that an Entry should capture 1 stack frame.
+     *         does not capture any stacktrace. It is recommended that an Entry should capture 1 stack frame, or anyhow
+     *         few (less than 10).
      */
     int capturedStackFrames() default -1;
 
