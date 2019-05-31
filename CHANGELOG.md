@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 1.1.1
+* Improved API for clearing current span.
+
 ## Version 1.1.0
 * Switch Trace ID and Span ID to be String in preparation for
 vendor interop via [TraceContext](https://w3c.github.io/distributed-tracing/report-trace-context.html).

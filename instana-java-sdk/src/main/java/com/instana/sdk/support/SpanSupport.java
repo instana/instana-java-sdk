@@ -265,8 +265,22 @@ public class SpanSupport {
    *
    * @param type
    *          The type of span to clear.
+   * @deprecated Use {@link SpanSupport#clearCurrent(Span.Type, String)}.
    */
+  @Deprecated
   public static void clearCurrent(Span.Type type) {
+    /* empty */
+  }
+
+  /**
+   * Clears an open span, i.e. ends a currently open span without committing it.
+   *
+   * @param type
+   *          The type of span to clear.
+   * @param name
+   *          span name.
+   */
+  public static void clearCurrent(Span.Type type, String name) {
     /* empty */
   }
 

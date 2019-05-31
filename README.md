@@ -35,7 +35,7 @@ When using maven you can add it with:
 <dependency>
   <groupId>com.instana</groupId>
   <artifactId>instana-java-sdk</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1</version>
 </dependency>
 ```
 
