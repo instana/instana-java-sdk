@@ -11,13 +11,13 @@ import javax.ws.rs.core.MediaType;
  * frameworks. But it is also possible to create custom entries not (yet) known to Instana.
  */
 @Path("/helloWorld")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces(MediaType.TEXT_PLAIN)
 public class HelloWorldResource {
 
   @GET
   public String listPeople() throws InterruptedException {
     Thread.sleep(1000);
-    return "Hello World! I had a one second nap";
+    return "Hello World! I had a one second nap.";
   }
 
 }

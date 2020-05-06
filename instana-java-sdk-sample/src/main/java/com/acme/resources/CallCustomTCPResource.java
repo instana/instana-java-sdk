@@ -14,7 +14,7 @@ import com.acme.tcp.server.CustomTCPClient;
  * This class shows how to build custom instrumentation based on an auto discovered Entry and a custom exit.
  */
 @Path("/customTCP")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces(MediaType.TEXT_PLAIN)
 public class CallCustomTCPResource {
 
   @GET
@@ -27,7 +27,7 @@ public class CallCustomTCPResource {
 
     Thread.sleep(1000); // sleeping makes the resulting trace nicer
 
-    return "I called my TCP service, and took several naps. Server responded with " + callServer.toString();
+    return "I called my TCP service, and took several naps. Server responded with " + callServer.toString() + ".";
   }
 
 }
