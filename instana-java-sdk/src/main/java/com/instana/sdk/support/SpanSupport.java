@@ -345,4 +345,23 @@ public class SpanSupport {
       map.put(LEVEL, "1");
     }
   }
+
+  /*
+   * Restore the trace context from the provided {@code map} argument, provided that it contains
+   * {@link SpanSupport#TRACE_ID} and {@link SpanSupport#SPAN_ID} as keys.
+   *
+   * The values of the {@link SpanSupport#TRACE_ID} and {@link SpanSupport#SPAN_ID} keys are passed
+   * to the {@link #inheritNext(String, String)} method.
+   *
+   * @return {@code true} if {@link SpanSupport#TRACE_ID} and {@link SpanSupport#SPAN_ID} are found in the map and the
+   *    trace context is restored; {@code false} if {@code map} is {@code null}, or it does not contain both
+   *    {@link SpanSupport#TRACE_ID} and {@link SpanSupport#SPAN_ID} as keys.
+   */
+  public static boolean continueTraceIfTracing(Map<? super String, ? super String> map) {
+    if (map != null && map.contains(TRACE_ID) && map.contains(SPAN_ID)) {
+      inheritNext(map.get(TRACE_ID), map.get(SPAN_ID));
+      return true;
+    }
+    return false;
+  }
 }
