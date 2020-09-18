@@ -1,6 +1,6 @@
 # Instana Java Trace SDK &nbsp; [![Build Status](https://travis-ci.org/instana/instana-java-sdk.svg?branch=master)](https://travis-ci.org/instana/instana-java-sdk)
 
-Instana automatically instruments well known frameworks for calls coming into a
+Instana automatically instruments well-known frameworks for calls coming into a
 monitored JVM, which we call `Entry` (also known as Server in OpenTracing), and
 calls leaving a monitored JVM, which we call `Exit` (also known as Client).
 Usually calls pass instrumented code twice: at the start of a request, and at
@@ -54,8 +54,6 @@ By design, the SDK will remain inactive when no Instana agent is monitoring the
 JVM process. It will also return to inactivity when the Instana agent is
 stopped. Therefore it is safe to keep it in your application code even when
 deploying to systems not yet monitored by Instana.
-
-
 
 The whole SDK contained in this repository is provided with an MIT License
 (see `LICENSE.md`), to allow any use and conflict with strict open source
