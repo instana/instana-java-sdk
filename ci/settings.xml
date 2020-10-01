@@ -1,0 +1,50 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <servers>
+    <server>
+      <id>instana-private</id>
+      <username>${ARTIFACTORY_USERNAME}</username>
+      <password>${ARTIFACTORY_PASSWORD}</password>
+    </server>
+    <server>
+      <id>agent-snapshots</id>
+      <username>${ARTIFACTORY_USERNAME}</username>
+      <password>${ARTIFACTORY_PASSWORD}</password>
+    </server>
+    <server>
+      <id>sonatype-nexus-staging</id>
+      <username>${SONATYPE_USER}</username>
+      <password>${SONATYPE_PASSWORD}</password>
+    </server>
+  </servers>
+
+  <mirrors>
+    <mirror>
+      <id>instana-private</id>
+      <name>Instana Artifactory</name>
+      <url>https://artifact.instana.io/artifactory/instana-private</url>
+      <mirrorOf>*</mirrorOf>
+    </mirror>
+  </mirrors>
+
+  <profiles>
+    <profile>
+      <id>artifactory</id>
+      <repositories>
+        <repository>
+          <id>instana-private</id>
+          <url>https://artifact.instana.io/artifactory/instana-private/</url>
+        </repository>
+        <repository>
+          <id>agent-snapshots</id>
+          <url>https://artifact.instana.io/artifactory/agent-snapshots</url>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>artifactory</activeProfile>
+  </activeProfiles>
+
+</settings>

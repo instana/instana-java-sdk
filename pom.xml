@@ -6,7 +6,7 @@
   <groupId>com.instana</groupId>
   <artifactId>instana-java-sdk-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.2.0-SNAPSHOT</version>
+  <version>1.2.0</version>
 
   <name>Instana - Java Instrumentation - SDK - Parent</name>
   <description>SDK for custom instrumentation and correlation.</description>
@@ -20,6 +20,16 @@
     <developer>
       <name>Fabian Lange</name>
       <email>fabian.lange@instana.com</email>
+      <url>http://www.instana.com</url>
+    </developer>
+    <developer>
+      <name>David Sondermann</name>
+      <email>david.sondermann@instana.com</email>
+      <url>http://www.instana.com</url>
+    </developer>
+    <developer>
+      <name>Norbert Schneider</name>
+      <email>norbert.schneider@instana.com</email>
       <url>http://www.instana.com</url>
     </developer>
   </developers>
@@ -36,10 +46,6 @@
     <url>https://github.com/instana/instana-java-sdk</url>
     <tag>HEAD</tag>
   </scm>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
 
   <modules>
     <module>instana-java-sdk</module>
