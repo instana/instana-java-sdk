@@ -324,28 +324,26 @@ public class SpanSupport {
   }
 
   /**
-   * Clears the currently open span, i.e. ends the currently open span without committing it.
+   * Clears the currently open SDK span, i.e. ends the currently open span without committing it.
    *
    * @since 1.2.0
    */
-  public static void clearCurrent() {
-    /* empty */
+  public static boolean clearCurrent() {
+    return false;
   }
 
   /**
-   * Clears an open span of type {@code type}, i.e. ends a currently open span without committing it.
+   * Clears an open SDK span of type {@code type}, i.e. ends a currently open span without committing it.
    *
    * @param type
    *          The type of span to clear.
-   * @deprecated Use {@link SpanSupport#clearCurrent(Span.Type, String)}.
    */
-  @Deprecated
-  public static void clearCurrent(Span.Type type) {
-    /* empty */
+  public static boolean clearCurrent(Span.Type type) {
+    return false;
   }
 
   /**
-   * Clears an open span of type {@code type} with name {@code name},
+   * Clears an open SDK span of type {@code type} with name {@code name},
    * i.e. ends a currently open span without committing it.
    *
    * @param type
@@ -353,8 +351,8 @@ public class SpanSupport {
    * @param name
    *          span name.
    */
-  public static void clearCurrent(Span.Type type, String name) {
-    /* empty */
+  public static boolean clearCurrent(Span.Type type, String name) {
+    return false;
   }
 
   /**
