@@ -9,7 +9,8 @@ import java.util.Arrays;
 /**
  * <p>
  * This annotation enables you to declare that the return value of the method it marks must be stored as a tag
- * on the currently active span.
+ * on the currently active span. This can be an Instana AutoTrace span or a manually created SDK span.
+ * </p>
  * <p>
  * For example, consider the following method annotation:
  * </p>
@@ -33,7 +34,8 @@ import java.util.Arrays;
  * on them.
  * </p>
  * <p>
- * If the returned value is {@code null}, the tag will not be created.
+ * If the returned value is {@code null}, the tag will not be created and you can verify that in Unbounded Analytics
+ * using the {@code is not present} operator in conjunction with the {@code call.tag} filter.
  * </p>
  * <p>
  * If the type of the return value is {@link java.util.Optional}, and the method {@link java.util.Optional#isPresent()}

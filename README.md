@@ -2,7 +2,8 @@
 
 Instana automatically instruments well-known frameworks for calls coming into a
 monitored JVM, which we call `Entry` (also known as Server in OpenTracing), and
-calls leaving a monitored JVM, which we call `Exit` (also known as Client).
+calls leaving a monitored JVM, which we call `Exit` (also known as Client). This
+feature is called [Instana AutoTrace](https://www.instana.com/docs/tracing/instana-autotrace).
 Usually calls pass instrumented code twice: at the start of a request, and at
 the end. The time elapsed between those two passings is the duration this call
 took.
@@ -61,60 +62,14 @@ licensing requirements.
 
 # Instana Trace Webservice
 
-Using the Trace SDK REST Web Service, it is possible to integrate Instana into
-any application written in any language. Each running Instana Agent can be used
-to feed in custom traces, which can be part of automatically captured traces or
-completely separated. The Agent offers an endpoint which listens on
-`http://localhost:42699/com.instana.plugin.generic.trace` and accepts the
-following JSON via a POST request:
+In some cases, for example using languages without an SDK or for applications that cannot be changed,
+another way of integration is needed. Using the [Trace SDK Web Service](https://www.instana.com/docs/api/agent/#trace-sdk-web-service),
+it is possible to integrate Instana into any application written in any language.
+Each running Instana Agent can be used to feed in custom traces, which can be part of automatically
+captured traces or completely separated.
 
-```
-{
-  'spanId': <string>,
-  'parentId': <string>,
-  'traceId': <string>,
-  'timestamp': <64 bit long>,
-  'duration': <64 bit long>,
-  'name' : <string>,
-  'type' : <string>,
-  'error' : <boolean>,
-  'data' : {
-    <string> : <string>
-  }
-}
-```
-
-`spanId` is a unique identifier for the span. Define the root span of a trace
-with the same `spanId` and `traceId`; define child spans with a unique `spanId`,
-the `traceId` of the root span and the `spanId` of the span immediately
-preceding in the hierarchy as parentId. `traceId`, `spanId` and `parentId` are
-64 bit unique values encoded as hex string like `b0789916ff8f319f`.
-
-```
-root (spanId=1, traceID=1)
-   child (spanId=2,traceId=1, parentId=1)
-      child (spanId=3, traceId=1, parentId=2)
-```
-
-`timestamp` and `duration` are in milliseconds.  `timestamp` must be the epoch
-timestamp coordinated to UTC. `name` can be any string which is used to
-visualize and group traces and can contain any text, but it is recommended to
-keep it simple. `type` is optional, but when given needs to be either `ENTRY`,
-`EXIT` or `INTERMEDIATE`. `data` is optional and can contain arbitrary
-key-value pairs. `error` is optional and can be set to `true` to indicate an
-erroneous span. Behaviour of supplying duplicate keys is unspecified.
-
-The endpoint also accepts a batch of spans, which then need to be given as array:
-```
-[
-  {
-    // span as above
-  },
-  {
-    // span as above
-  }
-]
-```
+A detailed description about the [Trace SDK Web Service](https://www.instana.com/docs/api/agent/#trace-sdk-web-service)
+can be found in the [documentation](https://www.instana.com/docs/api/agent/#trace-sdk-web-service).
 
 ## Limitations
 
@@ -125,6 +80,10 @@ Adhere to the following rate limits for the trace webservice:
 * Maximum batch size (spans/array): 1000
 
 ## FAQ
+
+### Are there any recommendations on how to create spans and annotations?
+On [Best practices for custom tracing](https://www.instana.com/docs/tracing/custom-best-practices/)
+you can find recommended practices and guidance on how to annotate spans to change their semantics.
 
 ### Is there a limit for the amount of calls from Agent to Backend?
 Data transmission between Instana agent and Instana backend depends on a lot of factors. It is done using a persistent HTTP2 connection and highly optimized.

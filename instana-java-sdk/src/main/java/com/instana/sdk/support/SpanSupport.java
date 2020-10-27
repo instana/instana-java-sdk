@@ -9,7 +9,8 @@ import com.instana.sdk.annotation.Span;
  * This support class allows for specifying additional information when recording a {@link Span}.
  * <p>
  * Most methods work on spans created by the SDK and spans created by the automatic trace instrumentation,
- * known as Instana AutoTrace. Details on which kind of spans can be created or manipulated are explained
+ * known as Instana AutoTrace. Some limitations may apply due to technical limitations in case of asynchronous
+ * frameworks and libraries. Details on which kind of spans can be created or manipulated are explained
  * in the method documentation.
  */
 @SuppressWarnings("unused")
@@ -385,7 +386,7 @@ public class SpanSupport {
   }
 
   /**
-   * Decodes a trace or span ID that was represented in a string format that can be send over the wire. 
+   * Decodes a trace or span ID that was represented in a string format that can be send over the wire.
    * This format is used by Instana's built-in instrumentations.
    *
    * @param stringId a trace or span ID

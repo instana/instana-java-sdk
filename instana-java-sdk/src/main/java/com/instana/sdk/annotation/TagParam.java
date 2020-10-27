@@ -10,6 +10,7 @@ import java.util.Arrays;
  * <p>
  * This annotation enables you to declare that the value of a method parameter it marks must be stored as a tag on
  * the currently active span. This can be an Instana AutoTrace span or a manually created SDK span.
+ * </p>
  * <p>
  * For example, consider the following parameter annotation:
  * </p>
@@ -32,7 +33,8 @@ import java.util.Arrays;
  * on them.
  * </p>
  * <p>
- * If the value of the annotated parameter is {@code null}, the tag will not be created.
+ * If the value of the annotated parameter is {@code null}, the tag will not be created and you can verify that in
+ * Unbounded Analytics using the {@code is not present} operator in conjunction with the {@code call.tag} filter.
  * </p>
  * <p>
  * If the type of the annotated parameter is {@link java.util.Optional}, and the method
