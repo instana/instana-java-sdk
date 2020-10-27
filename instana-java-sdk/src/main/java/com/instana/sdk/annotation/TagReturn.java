@@ -4,6 +4,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.Arrays;
 
 /**
  * <p>
@@ -28,7 +29,8 @@ import java.lang.annotation.Target;
  * </p>
  * <p>
  * The value of the resulting tag will be the result of the {@code #toString()} method invoked on return value.
- * Primitive types will be converted to a string. Arrays will be formatted by invoking {@code Arrays.toString()} on them.
+ * Primitive types will be converted to a string. Arrays will be formatted by invoking {@link Arrays#toString(Object[])}
+ * on them.
  * </p>
  * <p>
  * If the returned value is {@code null}, the tag will not be created.

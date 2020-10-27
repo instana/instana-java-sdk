@@ -4,6 +4,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.Arrays;
 
 /**
  * <p>
@@ -27,7 +28,8 @@ import java.lang.annotation.Target;
  * </p>
  * <p>
  * The value of the new tag will be the result of the {@code #toString()} method invoked on the annotated parameter.
- * Primitive types will be converted to a String. Arrays will be formatted by invoking {@code Arrays.toString()} on them.
+ * Primitive types will be converted to a String. Arrays will be formatted by invoking {@link Arrays#toString(Object[])}
+ * on them.
  * </p>
  * <p>
  * If the value of the annotated parameter is {@code null}, the tag will not be created.

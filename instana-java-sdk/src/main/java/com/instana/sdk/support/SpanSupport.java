@@ -8,8 +8,9 @@ import com.instana.sdk.annotation.Span;
 /**
  * This support class allows for specifying additional information when recording a {@link Span}.
  * <p>
- * Most methods work on spans created by the SDK and spans created by the automatic trace instrumentation a.k.a. autotrace.
- * Details on which kind of spans can be created or manipulated is explained in the method documentation.
+ * Most methods work on spans created by the SDK and spans created by the automatic trace instrumentation,
+ * known as Instana AutoTrace. Details on which kind of spans can be created or manipulated are explained
+ * in the method documentation.
  */
 @SuppressWarnings("unused")
 public class SpanSupport {
@@ -19,12 +20,12 @@ public class SpanSupport {
   }
 
   /**
-   * The header name used by Instana to send a trace id.
+   * The header name used by Instana to send a trace ID.
    */
   public static final String TRACE_ID = "X-INSTANA-T";
 
   /**
-   * The header name used by Instana to send a span id.
+   * The header name used by Instana to send a span ID.
    */
   public static final String SPAN_ID = "X-INSTANA-S";
 
@@ -42,7 +43,7 @@ public class SpanSupport {
   public static final String SUPPRESS = "0";
 
   /**
-   * A trace id of value {@code 0} that indicates an inactive span.
+   * A trace ID of value {@code 0} that indicates an inactive span.
    *
    * @deprecated inactive spans are returned as null Strings
    */
@@ -50,8 +51,8 @@ public class SpanSupport {
   public static final long VOID_ID = 0L;
 
   /**
-   * Indicates if a span, regardless it's {@code type} or {@code name}, is currently recorded.
-   * This can be a SDK or autotrace span. If the Instana agent is not active, this method always returns {@code false}.
+   * Indicates if a span, regardless of its {@code type} or {@code name}, is currently recorded.
+   * This can be an SDK or AutoTrace span. If the Instana agent is not active, this method always returns {@code false}.
    *
    * @return {@code true} if a span is currently recorded, otherwise, or if the Instana agent is not active, {@code false}
    * @since 1.2.0
@@ -62,8 +63,8 @@ public class SpanSupport {
 
   /**
    * Indicates if a span of type {@code type} is currently recorded.
-   * This can be a SDK or autotrace span. If the Instana agent is not active, this method always returns {@code false}.
-   * Furthermore, the {@code type} has to be {@code ENTRY} or {@code EXIT}.
+   * This can be an SDK or AutoTrace span. If the Instana agent is not active, this method always returns {@code false}.
+   * Furthermore, the {@code type} has to be {@link Span.Type#ENTRY} or {@link Span.Type#EXIT}.
    *
    * @param type span type
    * @return {@code true} if a span is currently recorded, otherwise, or if the Instana agent is not active, {@code false}
@@ -76,7 +77,7 @@ public class SpanSupport {
 
   /**
    * Indicates if a span of type {@code type} with name {@code name} is currently recorded.
-   * This can be a SDK or autotrace span. {@code name} is only taken into account for SDK spans of type {@code Span.Type.INTERMEDIATE}.
+   * This can be an SDK or AutoTrace span. {@code name} is only taken into account for SDK spans of type {@link Span.Type#INTERMEDIATE}.
    * If the Instana agent is not active, this method always returns {@code false}.
    *
    * @param type span type
@@ -89,8 +90,8 @@ public class SpanSupport {
 
   /**
    * Provides the trace ID of the currently recorded span of type {@code type}.
-   * This can be a SDK or autotrace span. If no span is currently recorded, or if the Instana agent is not active,
-   * {@code 0} is returned. Furthermore, the {@code type} has to be {@code ENTRY} or {@code EXIT}.
+   * This can be an SDK or AutoTrace span. If no span is currently recorded, or if the Instana agent is not active,
+   * {@code 0} is returned. Furthermore, the {@code type} has to be {@link Span.Type#ENTRY} or {@link Span.Type#EXIT}.
    *
    * @param type span type
    * @return trace ID of the currently recorded span of type {@code type}, or {code 0} if no span is recorded or the
@@ -104,7 +105,7 @@ public class SpanSupport {
 
   /**
    * Provides the trace ID of the currently recorded span of type {@code type} with name {@code name}.
-   * This can be a SDK or autotrace span. {@code name} is only taken into account for SDK spans of type {@code Span.Type.INTERMEDIATE}.
+   * This can be an SDK or AutoTrace span. {@code name} is only taken into account for SDK spans of type {@link Span.Type#INTERMEDIATE}.
    * If no span is currently recorded, or if the Instana agent is not active, {@code 0} is returned.
    *
    * @param type span type
@@ -119,8 +120,8 @@ public class SpanSupport {
   }
 
   /**
-   * Provides the trace ID of the currently recorded span, regardless it's {@code type} or {@code name}.
-   * This can be a SDK or autotrace span. If no span is currently recorded, or if the Instana agent is not active,
+   * Provides the trace ID of the currently recorded span, regardless of its {@code type} or {@code name}.
+   * This can be an SDK or AutoTrace span. If no span is currently recorded, or if the Instana agent is not active,
    * {@code null} is returned.
    *
    * @return trace ID of the currently recorded span,
@@ -133,7 +134,7 @@ public class SpanSupport {
 
   /**
    * Provides the trace ID of the currently recorded span of type {@code type} with name {@code name}.
-   * This can be a SDK or autotrace span. {@code name} is only taken into account for SDK spans of type {@code Span.Type.INTERMEDIATE}.
+   * This can be an SDK or AutoTrace span. {@code name} is only taken into account for SDK spans of type {@link Span.Type#INTERMEDIATE}.
    * If no span is currently recorded, or if the Instana agent is not active, {@code null} is returned.
    *
    * @param type span type
@@ -147,8 +148,8 @@ public class SpanSupport {
 
   /**
    * Provides the span ID of the currently recorded span of type {@code type}.
-   * This can be a SDK or autotrace span. If no span is currently recorded, or if the Instana agent is not active,
-   * {@code 0} is returned. Furthermore, the {@code type} has to be {@code ENTRY} or {@code EXIT}.
+   * This can be an SDK or AutoTrace span. If no span is currently recorded, or if the Instana agent is not active,
+   * {@code 0} is returned. Furthermore, the {@code type} has to be {@link Span.Type#ENTRY} or {@link Span.Type#EXIT}.
    *
    * @param type span type
    * @return span ID of the currently recorded span of type {@code type}, or {code 0} if no span is recorded or the
@@ -162,7 +163,7 @@ public class SpanSupport {
 
   /**
    * Provides the span ID of the currently recorded span of type {@code type} with name {@code name}.
-   * This can be a SDK or autotrace span. {@code name} is only taken into account for SDK spans of type {@code Span.Type.INTERMEDIATE}.
+   * This can be an SDK or AutoTrace span. {@code name} is only taken into account for SDK spans of type {@link Span.Type#INTERMEDIATE}.
    * If no span is currently recorded, or if the Instana agent is not active, {@code 0} is returned.
    *
    * @param type span type
@@ -177,8 +178,8 @@ public class SpanSupport {
   }
 
   /**
-   * Provides the span ID of the currently recorded span, regardless it's {@code type} or {@code name}.
-   * This can be a SDK or autotrace span. If no span is currently recorded, or if the Instana agent is not active,
+   * Provides the span ID of the currently recorded span, regardless of its {@code type} or {@code name}.
+   * This can be an SDK or AutoTrace span. If no span is currently recorded, or if the Instana agent is not active,
    * {@code null} is returned.
    *
    * @return span ID of the currently recorded span,
@@ -191,7 +192,7 @@ public class SpanSupport {
 
   /**
    * Provides the span ID of the currently recorded span of type {@code type} with name {@code name}.
-   * This can be a SDK or autotrace span. {@code name} is only taken into account for SDK spans of type {@code Span.Type.INTERMEDIATE}.
+   * This can be an SDK or AutoTrace span. {@code name} is only taken into account for SDK spans of type {@link Span.Type#INTERMEDIATE}.
    * If no span is currently recorded, or if the Instana agent is not active, {@code null} is returned.
    *
    * @param type span type
@@ -204,7 +205,7 @@ public class SpanSupport {
   }
 
   /**
-   * Writes an annotation as a {@code key}-{@code value} pair to the current span. This can be a SDK or autotrace span.
+   * Writes an annotation as a {@code key}-{@code value} pair to the current span. This can be an SDK or AutoTrace span.
    * If no span is currently recorded or if the Instana agent is not active, no annotation is written.
    *
    * @param key   a String key. Uniqueness is enforced in backend
@@ -216,7 +217,7 @@ public class SpanSupport {
   }
 
   /**
-   * Writes an annotation as a {@code key}-{@code value} pair to the current span. This can be a SDK or autotrace span.
+   * Writes an annotation as a {@code key}-{@code value} pair to the current span. This can be an SDK or AutoTrace span.
    * If no span is currently recorded or if the Instana agent is not active, no annotation is written.
    * This method evaluates the {@code value} lazily and only if a span is currently recorded. Using this method is
    * mainly intended for being used with a lambda expression as the last argument if Java 8 is available.
@@ -236,7 +237,7 @@ public class SpanSupport {
 
   /**
    * Writes an annotation as a {@code key}-{@code value} pair to the current span of type {@code type}.
-   * This can be a SDK or autotrace span. Furthermore, the {@code type} has to be {@code ENTRY} or {@code EXIT}.
+   * This can be an SDK or AutoTrace span. Furthermore, the {@code type} has to be {@link Span.Type#ENTRY} or {@link Span.Type#EXIT}.
    * If no span is currently recorded or if the Instana agent is not active, no annotation is written.
    *
    * @param type  span type
@@ -251,7 +252,7 @@ public class SpanSupport {
 
   /**
    * Writes an annotation as a {@code key}-{@code value} pair to the current span of type {@code type} and name {@code name}.
-   * This can be a SDK or autotrace span. {@code name} is only taken into account for SDK spans of type {@code Span.Type.INTERMEDIATE}.
+   * This can be an SDK or AutoTrace span. {@code name} is only taken into account for SDK spans of type {@link Span.Type#INTERMEDIATE}.
    * If no span is currently recorded or if the Instana agent is not active, no annotation is written.
    *
    * @param type  span type
@@ -265,7 +266,7 @@ public class SpanSupport {
 
   /**
    * Writes an annotation as a {@code key}-{@code value} pair to the current span of type {@code type}.
-   * This can be a SDK or autotrace span. Furthermore, the {@code type} has to be {@code ENTRY} or {@code EXIT}.
+   * This can be an SDK or AutoTrace span. Furthermore, the {@code type} has to be {@link Span.Type#ENTRY} or {@link Span.Type#EXIT}.
    * If no span is currently recorded or if the Instana agent is not active, no annotation is written. This method
    * evaluates the {@code value} lazily and only if a span is currently recorded. Using this method is mainly intended
    * for being used with a lambda expression as the last argument if Java 8 is available.
@@ -282,7 +283,7 @@ public class SpanSupport {
 
   /**
    * Writes an annotation as a {@code key}-{@code value} pair to the current span of type {@code type} with name {@code name}.
-   * This can be a SDK or autotrace span. {@code name} is only taken into account for SDK spans of type {@code Span.Type.INTERMEDIATE}.
+   * This can be an SDK or AutoTrace span. {@code name} is only taken into account for SDK spans of type {@link Span.Type#INTERMEDIATE}.
    * If no span is currently recorded or if the Instana agent is not active, no annotation is written. This method
    * evaluates the {@code value} lazily and only if a span is currently recorded. Using this method is mainly intended
    * for being used with a lambda expression as the last argument if Java 8 is available.
@@ -310,9 +311,9 @@ public class SpanSupport {
   }
 
   /**
-   * Indicates to Instana that the subsequent SDK or autotrace span should be traced with the given trace and span IDs.
-   * The next span can be a SDK or autotrace span with any type. This method is normally called after receiving a
-   * request from another entity that has the supplied {@code traceId} and {@code spanId}. The trace id must not be
+   * Indicates to Instana that the subsequent SDK or AutoTrace span should be traced with the given trace and span ID.
+   * The next span can be a SDK or AutoTrace span with any type. This method is normally called after receiving a
+   * request from another entity that has the supplied {@code traceId} and {@code spanId}. The trace ID must not be
    * {@code 0}.
    *
    * @param traceId to be inherited by next span
@@ -325,9 +326,9 @@ public class SpanSupport {
   }
 
   /**
-   * Indicates to Instana that the subsequent SDK or autotrace span should be traced with the given trace and span IDs.
-   * The next span can be a SDK or autotrace span with any type. This method is normally called after receiving a
-   * request from another entity that has the supplied {@code traceId} and {@code spanId}. The trace id and span id must
+   * Indicates to Instana that the subsequent SDK or AutoTrace span should be traced with the given trace and span ID.
+   * The next span can be a SDK or AutoTrace span with any type. This method is normally called after receiving a
+   * request from another entity that has the supplied {@code traceId} and {@code spanId}. The trace ID and span ID must
    * not be {@code null}.
    *
    * @param traceId to be inherited by next span
@@ -340,6 +341,7 @@ public class SpanSupport {
   /**
    * Clears the currently open SDK span, i.e. ends the currently open span without committing it.
    *
+   * @return {@code true} if the currently open span cloud be cleared, otherwise {@code false}
    * @since 1.2.0
    */
   public static boolean clearCurrent() {
@@ -348,9 +350,10 @@ public class SpanSupport {
 
   /**
    * Clears an open SDK span of type {@code type}, i.e. ends a currently open span without committing it.
-   * {@code type} has to be {@code ENTRY} or {@code EXIT}.
+   * {@code type} has to be {@link Span.Type#ENTRY} or {@link Span.Type#EXIT}.
    *
    * @param type The type of span to clear
+   * @return {@code true} if the open span cloud be cleared, otherwise {@code false}
    */
   public static boolean clearCurrent(Span.Type type) {
     return false;
@@ -362,18 +365,19 @@ public class SpanSupport {
    *
    * @param type The type of span to clear
    * @param name span name
+   * @return {@code true} if the open span cloud be cleared, otherwise {@code false}
    */
   public static boolean clearCurrent(Span.Type type, String name) {
     return false;
   }
 
   /**
-   * Converts a {@code long} trace or span id in a string format that can be send over the wire. This format is recognized
+   * Converts a trace or span ID in a string format that can be send over the wire. This format is recognized
    * by Instana's built-in instrumentations.
    *
-   * @param id a long id
-   * @return trace or span id
-   * @deprecated always use string ids without long conversion. trace ids might not fit long
+   * @param id a long trace or span ID
+   * @return trace or span ID
+   * @deprecated always use string IDs without long conversion. trace IDs might not fit long
    */
   @Deprecated
   public static String idAsString(long id) {
@@ -381,12 +385,12 @@ public class SpanSupport {
   }
 
   /**
-   * Decodes a trace or span id that was represented in a string format that can be send over the wire. This
-   * format is used by Instana's built-in instrumentations.
+   * Decodes a trace or span ID that was represented in a string format that can be send over the wire. 
+   * This format is used by Instana's built-in instrumentations.
    *
-   * @param stringId a String id
-   * @return decoded trace or span id
-   * @deprecated always use string ids without long conversion. trace ids might not fit long
+   * @param stringId a trace or span ID
+   * @return decoded trace or span ID
+   * @deprecated always use string IDs without long conversion. trace IDs might not fit long
    */
   @Deprecated
   public static long stringAsId(String stringId) {
@@ -401,8 +405,8 @@ public class SpanSupport {
 
   /**
    * Adds the trace headers of the currently open span to the given map.
-   * This can be a SDK or autotrace span. If tracing is not active the provided map will not be changed.
-   *
+   * This can be an SDK or AutoTrace span. If tracing is not active the provided map will not be changed.
+   * <p>
    * Header keys are represented by {@link SpanSupport#TRACE_ID}, {@link SpanSupport#SPAN_ID} and {@link SpanSupport#LEVEL} and
    * values are rendered as {@link String}
    *
@@ -419,9 +423,9 @@ public class SpanSupport {
 
   /**
    * Adds the trace headers of the span of type {@code type} to the given map.
-   * This can be a SDK or autotrace span. The {@code type} has to be {@code ENTRY} or {@code EXIT}.
+   * This can be an SDK or AutoTrace span. The {@code type} has to be {@link Span.Type#ENTRY} or {@link Span.Type#EXIT}.
    * If tracing is not active the provided map will not be changed.
-   *
+   * <p>
    * Header keys are represented by {@link SpanSupport#TRACE_ID}, {@link SpanSupport#SPAN_ID} and {@link SpanSupport#LEVEL} and
    * values are rendered as {@link String}
    *
@@ -436,9 +440,9 @@ public class SpanSupport {
 
   /**
    * Adds all trace headers of the span of type {@code type} with name {@code name} to the given map.
-   * This can be a SDK or autotrace span. {@code name} is only taken into account for SDK spans of type {@code Span.Type.INTERMEDIATE}.
+   * This can be an SDK or AutoTrace span. {@code name} is only taken into account for SDK spans of type {@link Span.Type#INTERMEDIATE}.
    * If tracing is not active the provided map will not be changed.
-   *
+   * <p>
    * Header keys are represented by {@link SpanSupport#TRACE_ID}, {@link SpanSupport#SPAN_ID} and {@link SpanSupport#LEVEL} and
    * values are rendered as {@link String}
    *
