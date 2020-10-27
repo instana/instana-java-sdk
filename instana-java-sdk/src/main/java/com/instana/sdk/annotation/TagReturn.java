@@ -31,13 +31,12 @@ import java.lang.annotation.Target;
  * Primitive types will be converted to a string. Arrays will be formatted by invoking {@code Arrays.toString()} on them.
  * </p>
  * <p>
- * If the returned value is {@code null}, the value of the resulting tag will be set to the empty string, so that you
- * can still search and group for it in Unbounded Analytics.
+ * If the returned value is {@code null}, the tag will not be created.
  * </p>
  * <p>
  * If the type of the return value is {@link java.util.Optional}, and the method {@link java.util.Optional#isPresent()}
  * invoked on it returns {@code true}, the value of the resulting tag will be the string representation of the result
- * of {@link java.util.Optional#get()}.
+ * of {@link java.util.Optional#get()}, as described above.
  * If {@link java.util.Optional#isPresent()} returns {@code false}, the tag will not be added to the currently active span.
  * </p>
  * <p>

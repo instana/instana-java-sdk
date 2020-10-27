@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * <p>
  * This annotation enables you to declare that the value of a method parameter it marks must be stored as a tag on
- * the currently active span.
+ * the currently active span. This can be an Instana AutoTrace span or a manually created SDK span.
  * <p>
  * For example, consider the following parameter annotation:
  * </p>
@@ -30,13 +30,12 @@ import java.lang.annotation.Target;
  * Primitive types will be converted to a String. Arrays will be formatted by invoking {@code Arrays.toString()} on them.
  * </p>
  * <p>
- * If the value of the annotated parameter is {@code null}, the value of the resulting tag will be set to the empty
- * string, so that you can still search and group for it in Unbounded Analytics.
+ * If the value of the annotated parameter is {@code null}, the tag will not be created.
  * </p>
  * <p>
  * If the type of the annotated parameter is {@link java.util.Optional}, and the method
  * {@link java.util.Optional#isPresent()} invoked on the passed in value returns {@code true}, the value of the
- * resulting tag will be the string representation of the result of {@link java.util.Optional#get()}.
+ * resulting tag will be the string representation of the result of {@link java.util.Optional#get()}, as described above.
  * If {@link java.util.Optional#isPresent()} returns {@code false}, the tag will not be added to the currently active span.
  * </p>
  * <p>
