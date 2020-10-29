@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.instana</groupId>
   <artifactId>instana-java-sdk</artifactId>
-  <version>1.1.2-SNAPSHOT</version>
+  <version>1.2.0</version>
 
   <name>Instana - Java Instrumentation - SDK</name>
   <description>SDK for custom instrumentation and correlation.</description>
@@ -19,6 +19,21 @@
     <developer>
       <name>Fabian Lange</name>
       <email>fabian.lange@instana.com</email>
+      <url>http://www.instana.com</url>
+    </developer>
+    <developer>
+      <name>David Sondermann</name>
+      <email>david.sondermann@instana.com</email>
+      <url>http://www.instana.com</url>
+    </developer>
+    <developer>
+      <name>Norbert Schneider</name>
+      <email>norbert.schneider@instana.com</email>
+      <url>http://www.instana.com</url>
+    </developer>
+    <developer>
+      <name>Michele Mancioppi</name>
+      <email>michele.mancioppi@instana.com</email>
       <url>http://www.instana.com</url>
     </developer>
   </developers>
@@ -67,7 +82,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5.1</version>
+        <version>3.8.1</version>
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
@@ -89,7 +104,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.10.4</version>
+        <version>3.0.1</version>
         <executions>
           <execution>
             <id>attach-javadocs</id>
@@ -99,19 +114,23 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.5.3</version>
-      </plugin>
     </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>**/version.txt</include>
+        </includes>
+      </resource>
+    </resources>
   </build>
 
   <distributionManagement>
     <snapshotRepository>
-      <id>sonatype-nexus-snapshots</id>
-      <name>Sonatype Nexus Snapshots</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <id>agent-snapshots</id>
+      <name>Instana Snapshot Repository</name>
+      <url>https://artifact.instana.io/artifactory/agent-snapshots</url>
     </snapshotRepository>
     <repository>
       <id>sonatype-nexus-staging</id>
@@ -123,14 +142,19 @@
   <profiles>
     <profile>
       <id>release</id>
-      <activation>
-        <property>
-          <name>performRelease</name>
-          <value>true</value>
-        </property>
-      </activation>
       <build>
         <plugins>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.8</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>sonatype-nexus-staging</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <!-- <autoreleaseafterclose>true</autoreleaseafterclose> -->
+            </configuration>
+          </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
@@ -144,9 +168,21 @@
                 </goals>
               </execution>
             </executions>
+            <configuration>
+              <keyname>ECD79A18B7C0860D</keyname>
+              <!-- This is necessary for gpg to not try to use the pinentry programs -->
+              <gpgArguments>
+                <arg>--batch</arg>
+                <arg>--pinentry-mode</arg>
+                <arg>loopback</arg>
+                <arg>--passphrase-file</arg>
+                <arg>pass.txt</arg>
+            </gpgArguments>
+            </configuration>
           </plugin>
         </plugins>
       </build>
     </profile>
   </profiles>
+
 </project>

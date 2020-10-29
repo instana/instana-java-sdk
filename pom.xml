@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.instana</groupId>
+  <artifactId>instana-java-sdk-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>1.2.0</version>
+
+  <name>Instana - Java Instrumentation - SDK - Parent</name>
+  <description>SDK for custom instrumentation and correlation.</description>
+  <url>https://github.com/instana/instana-java-sdk</url>
+
+  <organization>
+    <name>Instana Inc.</name>
+    <url>http://www.instana.com</url>
+  </organization>
+  <developers>
+    <developer>
+      <name>Fabian Lange</name>
+      <email>fabian.lange@instana.com</email>
+      <url>http://www.instana.com</url>
+    </developer>
+    <developer>
+      <name>David Sondermann</name>
+      <email>david.sondermann@instana.com</email>
+      <url>http://www.instana.com</url>
+    </developer>
+    <developer>
+      <name>Norbert Schneider</name>
+      <email>norbert.schneider@instana.com</email>
+      <url>http://www.instana.com</url>
+    </developer>
+    <developer>
+      <name>Michele Mancioppi</name>
+      <email>michele.mancioppi@instana.com</email>
+      <url>http://www.instana.com</url>
+    </developer>
+  </developers>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://github.com/instana/instana-java-sdk/blob/master/LICENSE.md</url>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:git://github.com/instana/instana-java-sdk.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/instana/instana-java-sdk.git</developerConnection>
+    <url>https://github.com/instana/instana-java-sdk</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <modules>
+    <module>instana-java-sdk</module>
+    <module>instana-java-sdk-sample</module>
+  </modules>
+
+</project>

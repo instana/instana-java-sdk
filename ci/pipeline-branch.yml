@@ -1,0 +1,87 @@
+---
+pipeline-vars: &pipeline-vars
+  instanacd-github-api-token: ((instanacd-github-api-token))
+  artifacts-instana-io: ((artifacts-instana-io))
+
+sdk-git-repository: &sdk-git-repo-config
+  uri: https://github.com/instana/instana-java-sdk.git
+  username: ((instanacd-github-api-token))
+  password: x-oauth-basic
+
+artifactory-params: &artifactory-params
+  ARTIFACTORY_USERNAME: ((artifacts-instana-io.username))
+  ARTIFACTORY_PASSWORD: ((artifacts-instana-io.password))
+
+resource_types:
+  - name: git-multibranch
+    type: docker-image
+    source:
+      repository: cfcommunity/git-multibranch-resource
+
+resources:
+  - name: sdk-source
+    type: git-multibranch
+    icon: github
+    source:
+      <<: *sdk-git-repo-config
+      branches: '.*'
+      ignore_branches: '(master|release.*)'
+
+jobs:
+  - name: self-update
+    plan:
+      - get: sdk-source
+        trigger: true
+      - set_pipeline: self
+        file: sdk-source/ci/pipeline-branch.yml
+        vars:
+          <<: *pipeline-vars
+
+  - name: build-sdk
+    plan:
+      - get: sdk-source
+        trigger: true
+        passed: [ self-update ]
+      - task: build
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: maven
+              tag: 3-openjdk-8
+          inputs:
+            - name: sdk-source
+          run:
+            dir: sdk-source/
+            path: mvn
+            args:
+              - --batch-mode
+              - clean
+              - install
+
+  - name: prerelease-sdk
+    plan:
+      - get: sdk-source
+        passed: [ build-sdk ]
+      - task: prerelease
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: maven
+              tag: 3-openjdk-8
+          inputs:
+            - name: sdk-source
+          params:
+            <<: *artifactory-params
+          run:
+            path: mvn
+            args:
+              - --batch-mode
+              - -s
+              - sdk-source/ci/settings.xml
+              - -f
+              - sdk-source/instana-java-sdk/pom.xml
+              - deploy

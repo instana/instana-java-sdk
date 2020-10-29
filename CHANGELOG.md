@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 1.2.0
+* Add `@TagParam` and `@TagReturn` annotations
+* Add overloaded methods to `SpanSupport` to use on currently active span
+* Add method `continueTraceIfTracing` to continue a trace with previously extracted trace headers
+* Enable `SpanSupport` methods to also work on AutoTrace spans (with Java Trace Sensor 1.2.351 or above)
+
 ## Version 1.1.1
 * Improved API for clearing current span.
 

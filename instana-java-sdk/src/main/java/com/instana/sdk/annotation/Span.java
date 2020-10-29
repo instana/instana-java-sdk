@@ -46,7 +46,9 @@ public @interface Span {
    *         {@link Object#toString()} method is invoked on all arguments. If any such invocation triggers an exception,
    *         the arguments for this methods are not stored. It is the responsibility of the user to assure that these
    *         methods do not imply any side-effects to the application.
+   * @deprecated use annotation {@link TagParam}, which gives you full control over the names of the tags to be created
    */
+  @Deprecated
   boolean captureArguments() default false;
 
   /**
@@ -54,7 +56,9 @@ public @interface Span {
    *         {@link Object#toString()} method is invoked on the return value. If this invocation triggers an exception,
    *         the return value is not stored. It is the responsibility of the user to assure that the invocation does not
    *         imply any unwanted side-effect to the application.
+   * @deprecated use annotation {@link TagReturn}, which gives you full control over the name of the tag to be created
    */
+  @Deprecated
   boolean captureReturn() default false;
 
   /**

@@ -1,0 +1,115 @@
+---
+pipeline-vars: &pipeline-vars
+  instanacd-github-api-token: ((instanacd-github-api-token))
+  artifacts-instana-io: ((artifacts-instana-io))
+  team-java-slack-webhook: ((team-java-slack-webhook))
+  team-java-sign-key: ((team-java-sign-key))
+  team-java-sign-password: ((team-java-sign-password))
+  team-java-sonatype: ((team-java-sonatype))
+
+mvn-params: &mvn-params
+  ARTIFACTORY_USERNAME: ((artifacts-instana-io.username))
+  ARTIFACTORY_PASSWORD: ((artifacts-instana-io.password))
+  TEAM_JAVA_SIGN_KEY: ((team-java-sign-key))
+  TEAM_JAVA_SIGN_PASSWORD: ((team-java-sign-password))
+  SONATYPE_USER: ((team-java-sonatype.username))
+  SONATYPE_PASSWORD: ((team-java-sonatype.password))
+
+sdk-git-repository: &sdk-git-repo-config
+  uri: https://github.com/instana/instana-java-sdk.git
+  username: ((instanacd-github-api-token))
+  password: x-oauth-basic
+  branch: release-1.2.0
+
+resource_types:
+  - name: slack-notifier
+    type: docker-image
+    source:
+      repository: mockersf/concourse-slack-notifier
+
+resources:
+  - name: sdk-source
+    type: git
+    icon: github
+    source:
+      <<: *sdk-git-repo-config
+
+  - name: notify
+    type: slack-notifier
+    icon: slack
+    source:
+      url: ((team-java-slack-webhook))
+
+jobs:
+  - name: self-update
+    plan:
+      - get: sdk-source
+        trigger: true
+      - set_pipeline: self
+        file: sdk-source/ci/pipeline-release.yml
+        vars:
+          <<: *pipeline-vars
+
+  - name: build-sdk
+    plan:
+      - get: sdk-source
+        trigger: true
+        passed: [ self-update ]
+      - task: build
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: maven
+              tag: 3-openjdk-8
+          inputs:
+            - name: sdk-source
+          run:
+            dir: sdk-source/
+            path: mvn
+            args:
+              - --batch-mode
+              - clean
+              - install
+    on_failure: &failed-ci
+      put: notify
+      params:
+        mode: concise
+        alert_type: failed
+
+  - name: release-sdk
+    plan:
+      - get: sdk-source
+        passed: [ build-sdk ]
+      - task: release
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: maven
+              tag: 3-openjdk-8
+          inputs:
+            - name: sdk-source
+          outputs:
+            - name: version
+          params:
+            <<: *mvn-params
+          run:
+            dir: sdk-source/
+            path: sh
+            args:
+              - -exc
+              - './ci/release.sh'
+      - put: sdk-source
+        params:
+          repository: sdk-source
+          only_tag: true
+          tag: version/version.txt
+    on_failure: *failed-ci
+    on_success:
+      put: notify
+      params:
+        mode: concise
+        alert_type: success
