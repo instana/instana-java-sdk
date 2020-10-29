@@ -19,7 +19,7 @@ sdk-git-repository: &sdk-git-repo-config
   uri: https://github.com/instana/instana-java-sdk.git
   username: ((instanacd-github-api-token))
   password: x-oauth-basic
-  branch: release-1.2.0
+  branch: master
 
 resource_types:
   - name: slack-notifier
