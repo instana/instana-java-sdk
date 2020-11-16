@@ -12,10 +12,6 @@
   <description>SDK for custom instrumentation and correlation.</description>
   <url>https://github.com/instana/instana-java-sdk</url>
 
-  <organization>
-    <name>Instana Inc.</name>
-    <url>http://www.instana.com</url>
-  </organization>
   <developers>
     <developer>
       <name>Fabian Lange</name>
@@ -38,6 +34,12 @@
       <url>http://www.instana.com</url>
     </developer>
   </developers>
+
+  <organization>
+    <name>Instana Inc.</name>
+    <url>http://www.instana.com</url>
+  </organization>
+
   <licenses>
     <license>
       <name>MIT License</name>
@@ -51,6 +53,16 @@
     <url>https://github.com/instana/instana-java-sdk</url>
     <tag>HEAD</tag>
   </scm>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.instana</groupId>
+        <artifactId>instana-java-sdk</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <modules>
     <module>instana-java-sdk</module>
