@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# Pre-commit script to ensure the required IBM/Instana
+# license headers are added to the relevant source files.
+# Note that if you bypass this pre-commit git hook and didn't
+# run the maven command mentioned below to add the license headers
+# to new files, the build will fail.
+
+echo
+echo Running "${BASH_SOURCE[0]}"
+echo
+
+command_exists () {
+  command -v "$1" >/dev/null 2>&1
+}
+
+command_exists mvn || {
+	echo >&2 "Can't find 'mvn' in PATH. Please ensure you have installed Maven."
+	exit 1
+}
+
+echo "Check license headers..."
+echo "=================================="
+mvn --quiet validate license:check
+MVN_STATUS=$?
+
+if [ $MVN_STATUS -eq 0 ]; then
+	echo -e "All licenses are in place. \n"
+else
+  echo "=================================="
+	echo -e >&2 "Some licenses are missing. Please run 'mvn validate license:format'. \n"
+	exit 1
+fi
