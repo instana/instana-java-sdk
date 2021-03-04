@@ -1,3 +1,7 @@
+/*
+ * (c) Copyright IBM Corp. 2021
+ * (c) Copyright Instana Inc.
+ */
 package com.instana.sample.http.jetty;
 
 import org.eclipse.jetty.server.Server;
