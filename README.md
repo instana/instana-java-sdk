@@ -98,3 +98,8 @@ This depends on the host that should be monitored, e.g. the number of Docker con
 
 ### How should the agent environment be configured?
 See https://docs.instana.io/quick_start/agent_configuration/
+
+# Copyright header / checks
+
+Every source file contains a copyright header. If you are creating new files you can add those by running the command: `mvn validate license:format`.
+Furthermore, a git hook check the headers in the `pre-commit` phase.

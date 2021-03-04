@@ -117,6 +117,56 @@
           <source>8</source>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>timestamp-property</id>
+            <configuration>
+              <name>current.year</name>
+              <locale>en_US</locale>
+              <pattern>yyyy</pattern>
+              <unit>year</unit>
+            </configuration>
+            <goals>
+              <goal>timestamp-property</goal>
+            </goals>
+            <phase>validate</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>4.0.rc2</version>
+        <configuration>
+          <useDefaultExcludes>true</useDefaultExcludes>
+          <aggregate>false</aggregate>
+          <defaultProperties>
+            <!--suppress MavenModelInspection -->
+            <currentYear>${current.year}</currentYear>
+          </defaultProperties>
+          <licenseSets>
+            <licenseSet>
+              <header>${project.basedir}/../license-header.txt</header>
+              <includes>
+                <include>**/src/main/java/**/*.java</include>
+                <include>**/src/test/java/**/*.java</include>
+              </includes>
+            </licenseSet>
+          </licenseSets>
+        </configuration>
+        <executions>
+          <execution>
+            <id>license-check</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
     <resources>
       <resource>
