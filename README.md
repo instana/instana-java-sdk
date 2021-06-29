@@ -91,7 +91,7 @@ Data transmission between Instana agent and Instana backend depends on a lot of 
 ### What is the optimal package size (split size) to send 50,000 spans with a size about 40 MiB over the Agent to Backend?
 Recommended strategy is to buffer spans for up to one second or until 500 spans were collected, then transmit the spans to the agent. An implementation of this transmission strategy can be seen here:
 
-https://github.com/instana/nodejs-sensor/blob/6ec0d469006ad52f4d5fde7218b163e05bf5b2ad/src/tracing/transmission.js
+https://github.com/instana/nodejs/blob/6ec0d469006ad52f4d5fde7218b163e05bf5b2ad/src/tracing/transmission.js
 
 ### Which requirements are recommended for best Agent performance (cpu, ram, etc.)?
 This depends on the host that should be monitored, e.g. the number of Docker containers per host etc.
