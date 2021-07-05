@@ -13,11 +13,17 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
 import java.util.function.Function;
 
 public class CustomHttpFramework {
 
   private final Map<String, Function<Map<String, String>, String>> handlers = new ConcurrentHashMap<>();
+  private final CountDownLatch serverStarted = new CountDownLatch(1);
+
+  public void awaitServerStartup() throws InterruptedException {
+    serverStarted.await();
+  }
 
   public void register(String path, Function<Map<String, String>, String> handler) {
     handlers.put(path, handler);
@@ -25,6 +31,7 @@ public class CustomHttpFramework {
 
   public void runOnPort(int port) throws IOException {
     try (ServerSocket server = new ServerSocket(port)) {
+      serverStarted.countDown();
       while (true) {
         try (Socket connection = server.accept()) {
           BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
