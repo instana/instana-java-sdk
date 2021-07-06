@@ -1,6 +1,9 @@
+/*
+ * (c) Copyright IBM Corp. 2021
+ * (c) Copyright Instana Inc.
+ */
 package com.instana.sample.http.custom;
 
-import com.instana.sample.App;
 import com.instana.sdk.annotation.Span;
 import com.instana.sdk.support.SpanSupport;
 
