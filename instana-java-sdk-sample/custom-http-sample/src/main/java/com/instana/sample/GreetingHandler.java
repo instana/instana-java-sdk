@@ -30,7 +30,7 @@ public class GreetingHandler implements Function<Map<String, String>, String> {
   @Span(type = Span.Type.ENTRY, value = SPAN_NAME)
   private String doApply(Map<String, String> headers) {
     System.out.println("Current span ID: " + Long.toHexString(SpanSupport.currentSpanId(Span.Type.ENTRY)));
-    SpanSupport.annotate(Span.Type.ENTRY, SPAN_NAME, "tags.http.url", "http://localhost:8080/greeting");
+    SpanSupport.annotate(Span.Type.ENTRY, SPAN_NAME, "tags.http.url", "http://" + App.HOST + ":" + App.PORT + App.GREETING);
     SpanSupport.annotate(Span.Type.ENTRY, SPAN_NAME, "tags.http.method", "GET");
     SpanSupport.annotate(Span.Type.ENTRY, SPAN_NAME, "tags.http.status_code", "200");
     SpanSupport.annotate(Span.Type.ENTRY, SPAN_NAME, "tags.error", "true");
