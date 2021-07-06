@@ -36,6 +36,8 @@ public class App {
 
     thread.start();
     framework.awaitServerStartup();
+    // A time delay of 1 minute is added here to make sure
+    // that the instrumentation is completed before the client request hits the server
     Thread.sleep(Duration.ofMinutes(1).toMillis());
     createClient();
   }
