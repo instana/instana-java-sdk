@@ -2,6 +2,7 @@
 pipeline-vars: &pipeline-vars
   instanacd-github-api-token: ((instanacd-github-api-token))
   artifacts-instana-io: ((artifacts-instana-io))
+  branch: ((branch))
 
 sdk-git-repository: &sdk-git-repo-config
   uri: https://github.com/instana/instana-java-sdk.git
