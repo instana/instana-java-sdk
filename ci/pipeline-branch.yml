@@ -2,30 +2,24 @@
 pipeline-vars: &pipeline-vars
   instanacd-github-api-token: ((instanacd-github-api-token))
   artifacts-instana-io: ((artifacts-instana-io))
+  branch: ((branch))
 
 sdk-git-repository: &sdk-git-repo-config
   uri: https://github.com/instana/instana-java-sdk.git
   username: ((instanacd-github-api-token))
   password: x-oauth-basic
+  branch: ((branch))
 
 artifactory-params: &artifactory-params
   ARTIFACTORY_USERNAME: ((artifacts-instana-io.username))
   ARTIFACTORY_PASSWORD: ((artifacts-instana-io.password))
 
-resource_types:
-  - name: git-multibranch
-    type: docker-image
-    source:
-      repository: cfcommunity/git-multibranch-resource
-
 resources:
   - name: sdk-source
-    type: git-multibranch
+    type: git
     icon: github
     source:
       <<: *sdk-git-repo-config
-      branches: '.*'
-      ignore_branches: '(master|release.*)'
 
 jobs:
   - name: self-update
