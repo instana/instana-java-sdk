@@ -14,12 +14,6 @@ artifactory-params: &artifactory-params
   ARTIFACTORY_USERNAME: ((artifacts-instana-io.username))
   ARTIFACTORY_PASSWORD: ((artifacts-instana-io.password))
 
-resource_types:
-  - name: git-multibranch
-    type: docker-image
-    source:
-      repository: cfcommunity/git-multibranch-resource
-
 resources:
   - name: sdk-source
     type: git
