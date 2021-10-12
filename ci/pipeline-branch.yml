@@ -7,6 +7,7 @@ sdk-git-repository: &sdk-git-repo-config
   uri: https://github.com/instana/instana-java-sdk.git
   username: ((instanacd-github-api-token))
   password: x-oauth-basic
+  branch: ((branch))
 
 artifactory-params: &artifactory-params
   ARTIFACTORY_USERNAME: ((artifacts-instana-io.username))
@@ -20,12 +21,10 @@ resource_types:
 
 resources:
   - name: sdk-source
-    type: git-multibranch
+    type: git
     icon: github
     source:
       <<: *sdk-git-repo-config
-      branches: '.*'
-      ignore_branches: '(master|release.*)'
 
 jobs:
   - name: self-update
