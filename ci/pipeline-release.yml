@@ -23,7 +23,7 @@ sdk-git-repository: &sdk-git-repo-config
 
 resource_types:
   - name: slack-notifier
-    type: release-image
+    type: registry-image
     source:
       repository: mockersf/concourse-slack-notifier
 
