@@ -1,5 +1,5 @@
 /*
- * (c) Copyright IBM Corp. 2021
+ * (c) Copyright IBM Corp. 2026
  * (c) Copyright Instana Inc.
  */
 package com.instana.sample;

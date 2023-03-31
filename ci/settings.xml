@@ -22,8 +22,8 @@
     <mirror>
       <id>instana-private</id>
       <name>Instana Artifactory</name>
-      <url>https://artifact.instana.io/artifactory/instana-private</url>
-      <mirrorOf>*</mirrorOf>
+      <url>https://na.artifactory.swg-devops.com/artifactory/instana-team-release-sensors-maven-local</url>
+      <mirrorOf>!central</mirrorOf>
     </mirror>
   </mirrors>
 
@@ -33,7 +33,7 @@
       <repositories>
         <repository>
           <id>instana-private</id>
-          <url>https://artifact.instana.io/artifactory/instana-private/</url>
+          <url>https://na.artifactory.swg-devops.com/artifactory/instana-team-release-sensors-maven-local/</url>
         </repository>
         <repository>
           <id>agent-snapshots</id>

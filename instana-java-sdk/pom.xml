@@ -5,7 +5,7 @@
 
   <groupId>com.instana</groupId>
   <artifactId>instana-java-sdk</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1-SNAPSHOT</version>
 
   <name>Instana - Java Instrumentation - SDK</name>
   <description>SDK for custom instrumentation and correlation.</description>
@@ -183,7 +183,7 @@
     <snapshotRepository>
       <id>agent-snapshots</id>
       <name>Instana Snapshot Repository</name>
-      <url>https://artifact.instana.io/artifactory/agent-snapshots</url>
+      <url>https://na.artifactory.swg-devops.com/artifactory/instana-team-release-sensors-maven-local</url>
     </snapshotRepository>
     <repository>
       <id>sonatype-nexus-staging</id>
