@@ -26,8 +26,8 @@ class InstanaJavaSdkController {
   @GetMapping(value = "/profile", produces = "application/json")
   @Operation(summary = "Get all profiles", description = "Retrieves all profiles with optional error simulation for testing custom span error handling")
   public List<Profile> getAll(
-      @Parameter(description = "Simulate error for testing span error handling", example = "false")
-      @RequestParam(name = "error", defaultValue = "false") Boolean error) {
+    @Parameter(description = "Simulate error for testing span error handling", example = "false")
+    @RequestParam(name = "error", defaultValue = "false") Boolean error) {
     return profileService.all(error);
   }
 

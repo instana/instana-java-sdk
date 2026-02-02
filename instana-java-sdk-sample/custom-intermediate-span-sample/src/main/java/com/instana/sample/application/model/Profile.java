@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Profile entity representing a user profile stored in MongoDB.
- * Uses Lombok annotations to automatically generate getters, setters, toString, equals, and hashCode.
  */
 @Document(collection = "profile")
 @Data

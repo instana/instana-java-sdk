@@ -1,6 +1,7 @@
 # Custom Intermediate Span Sample
 
-This sample demonstrates how to use the Instana Java SDK to create custom intermediate spans in a Spring Boot application with MongoDB.
+This sample demonstrates how to use the Instana Java SDK to create custom intermediate spans in a Spring Boot
+application with MongoDB.
 
 ## Prerequisites
 
@@ -10,6 +11,7 @@ This sample demonstrates how to use the Instana Java SDK to create custom interm
 ## Setup MongoDB
 
 Install MongoDB (macOS):
+
 ```bash
 brew tap mongodb/brew
 brew install mongodb-community
@@ -17,6 +19,7 @@ brew services start mongodb-community
 ```
 
 To check if MongoDB is running:
+
 ```bash
 brew services list
 ```
