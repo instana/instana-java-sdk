@@ -17,6 +17,7 @@
   <modules>
     <module>custom-http-sample</module>
     <module>custom-scheduler-sample</module>
+    <module>custom-intermediate-span-sample</module>
   </modules>
 
 </project>
