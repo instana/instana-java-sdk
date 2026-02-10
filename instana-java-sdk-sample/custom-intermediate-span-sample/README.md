@@ -5,7 +5,7 @@ application with MongoDB.
 
 ## Prerequisites
 
-- **Java 11** or higher
+- **Java 8** or higher
 - **MongoDB** installed and running
 
 ## Setup MongoDB
@@ -45,7 +45,7 @@ brew services list
 
 ## Configuration
 
-- **Java Version**: 11
-- **Spring Boot Version**: 2.7.18
+- **Java Version**: 8
+- **Spring Boot Version**: 2.6.15
 - **Port**: 8081
 - **MongoDB**: localhost:27017

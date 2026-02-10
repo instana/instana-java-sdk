@@ -21,7 +21,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spring-boot.version>2.7.18</spring-boot.version>
+    <spring-boot.version>2.6.15</spring-boot.version>
   </properties>
 
   <dependencyManagement>
@@ -62,11 +62,11 @@
       <artifactId>instana-java-sdk</artifactId>
     </dependency>
 
-    <!-- OpenAPI / Swagger UI (Java 11 compatible version) -->
+    <!-- OpenAPI / Swagger UI (Java 8 compatible version) -->
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-ui</artifactId>
-      <version>1.7.0</version>
+      <version>1.6.15</version>
     </dependency>
 
     <!-- Lombok -->
@@ -88,12 +88,13 @@
   <build>
     <plugins>
 
-      <!-- Maven Compiler Plugin for Java 11 -->
+      <!-- Maven Compiler Plugin for Java 8 -->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <release>11</release>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
 
